@@ -10,9 +10,9 @@ const Navbar = async () => {
 
     // console.log(user)
     return (
-        <div className="w-full h-14 flex items-center justify-center shadow-md">
+        <div className="w-full absolute bg-white top-0 left-0 h-14 flex items-center justify-center shadow-md">
             <div className='flex justify-around items-center w-full'>
-                <Link href={"/"} className="left"><Image src={"/logo.jpg"} width={90} height={45} alt='ChstAI Logo' /></Link>
+                <Link href={"/"} className="left"><Image src={"/logo.jpg"} width={90} height={45} alt='ChatAI Logo' /></Link>
                 <div className="right">
                     <ul className='flex items-center justify-center gap-6'>
                         <li className="cursor-pointer hover:text-blue-700">Pricing</li>
