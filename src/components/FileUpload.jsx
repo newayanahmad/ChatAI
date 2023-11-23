@@ -13,17 +13,19 @@ const FileUpload = () => {
     const { toast } = useToast()
     const [uploading, setUploading] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    // const { startUpload } = useUploadThing("pdfUploader", {
-    //     onClientUploadComplete: () => {
-    //         alert("uploaded successfully!");
-    //     },
-    //     onUploadError: () => {
-    //         alert("error occurred while uploading");
-    //     },
-    //     onUploadBegin: () => {
-    //         alert("upload has begun");
-    //     },
-    // },)
+    const { startUpload } = useUploadThing("pdfUploader", {
+        onClientUploadComplete: (res) => {
+            alert("uploaded successfully!");
+            setIsLoading(false);
+            console.log("inside onClientUploadComplete", res);
+        },
+        onUploadError: () => {
+            alert("error occurred while uploading");
+        },
+        onUploadBegin: () => {
+            alert("upload has begun");
+        },
+    },)
     const { getRootProps, getInputProps } = useDropzone(
         {
             accept: { "application/pdf": [".pdf"] },
@@ -42,15 +44,9 @@ const FileUpload = () => {
                 }
                 try {
                     setUploading(true);
-                    const form = new FormData()
-                    console.log(file.path)
-                    form.set("file", file)
-                    const res = await fetch("/api/upload", {
-                        method: "POST",
-                        body: form
-                    })
-                    const data = await res.json()
 
+                    const res = await startUpload(acceptedFiles)
+                    console.log(res)
                     if (!res) {
                         return toast({
                             title: "Something went wrong, no response received",
@@ -67,25 +63,7 @@ const FileUpload = () => {
                     //         variant: "destructive"
                     //     })
                     // }
-                    console.log("file uploaded", data)
 
-                    setUploading(false);
-                    // const data = await uploadToS3(file);
-                    // console.log("meow", data);
-                    // if (!data?.file_key || !data.file_name) {
-                    //     toast.error("Something went wrong");
-                    //     return;
-                    // }
-                    // mutate(data, {
-                    //     onSuccess: ({ chat_id }) => {
-                    //         toast.success("Chat created!");
-                    //         router.push(`/chat/${chat_id}`);
-                    //     },
-                    //     onError: (err) => {
-                    //         toast.error("Error creating chat");
-                    //         console.error(err);
-                    //     },
-                    // });
                 } catch (error) {
                     console.log(error);
                 }

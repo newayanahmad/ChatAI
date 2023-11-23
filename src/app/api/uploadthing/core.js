@@ -1,3 +1,5 @@
+import { FileModel } from "@/db/Schema";
+import connectToDatabase from "@/db/connect";
 import { currentUser } from "@clerk/nextjs";
 import { createUploadthing } from "uploadthing/next";
 
@@ -17,6 +19,15 @@ export const ourFileRouter = {
             return { userId: user.id };
         })
         .onUploadComplete(async ({ metadata, file }) => {
+            await connectToDatabase()
+            console.log("Upload complete!", file);
+            const f = await FileModel({
+                userId: metadata.userId,
+                fileUrl: file.url,
+                fileName: file.name,
+                fileKey: file.key,
+            })
+            await f.save()
             // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
             return { file };
         }),

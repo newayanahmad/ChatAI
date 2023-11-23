@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-let User;
+let User, FileModel;
 
 if (mongoose.models.User) {
     User = mongoose.model('User');
@@ -15,5 +15,19 @@ if (mongoose.models.User) {
 
     User = mongoose.model('User', UserSchema);
 }
+if (mongoose.models.File) {
+    FileModel = mongoose.model('File');
+} else {
+    const FileSchema = new mongoose.Schema({
+        userId: { type: String, required: true },
+        fileUrl: { type: String, required: true },
+        fileName: { type: String },
+        fileKey: { type: String, required: true },
+        messages: { type: Array, default: [] },
+        createdAt: { type: Date, required: true, default: Date.now }
+    });
 
-export { User };
+    FileModel = mongoose.model('File', FileSchema);
+}
+
+export { User, FileModel };
