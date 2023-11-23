@@ -15,9 +15,9 @@ const FileUpload = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { startUpload } = useUploadThing("pdfUploader", {
         onClientUploadComplete: (res) => {
-            alert("uploaded successfully!");
             setIsLoading(false);
             console.log("inside onClientUploadComplete", res);
+            router.push(`/dashboard`);
         },
         onUploadError: () => {
             alert("error occurred while uploading");

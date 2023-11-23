@@ -18,7 +18,7 @@ import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { useState } from 'react'
 
-import { useForm } from 'react-hook-form'
+// import { useForm } from 'react-hook-form'
 import { cn } from '@/lib/utils'
 import {
     DropdownMenu,
@@ -36,6 +36,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const PdfRenderer = ({ url }) => {
     const { toast } = useToast()
+    // console.log(url)
 
     const [numPages, setNumPages] = useState()
     const [currPage, setCurrPage] = useState(1)
@@ -45,28 +46,21 @@ const PdfRenderer = ({ url }) => {
 
     const isLoading = renderedScale !== scale
 
-    const CustomPageValidator = z.object({
-        page: z
-            .string()
-            .refine(
-                (num) => Number(num) > 0 && Number(num) <= numPages!
-            ),
-    })
 
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        setValue,
-    } = useForm({
-        defaultValues: {
-            page: '1',
-        },
-        resolver: zodResolver(CustomPageValidator),
-    })
 
-    console.log(errors)
+    // const {
+    //     register,
+    //     handleSubmit,
+    //     formState: { errors },
+    //     setValue,
+    // } = useForm({
+    //     defaultValues: {
+    //         page: '1',
+    //     }
+    // })
+
+    // console.log(errors)
 
     const { width, ref } = useResizeDetector()
 
@@ -96,10 +90,10 @@ const PdfRenderer = ({ url }) => {
 
                     <div className='flex items-center gap-1.5'>
                         <Input
-                            {...register('page')}
+                            // {...register('page')}
                             className={cn(
                                 'w-12 h-8',
-                                errors.page && 'focus-visible:ring-red-500'
+                                'focus-visible:ring-red-500'
                             )}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
@@ -120,7 +114,7 @@ const PdfRenderer = ({ url }) => {
                         }
                         onClick={() => {
                             setCurrPage((prev) =>
-                                prev + 1 > numPages! ? numPages! : prev + 1
+                                prev + 1 > numPages ? numPages : prev + 1
                             )
                             setValue('page', String(currPage + 1))
                         }}

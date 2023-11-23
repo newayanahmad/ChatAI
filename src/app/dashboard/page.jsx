@@ -11,10 +11,31 @@ import Skeleton from 'react-loading-skeleton'
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useAuth } from "@clerk/nextjs"
+import { useRouter } from 'next/navigation'
 
 
 const Page = () => {
+  const [files, setFiles] = useState([])
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(true)
+  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const fetchFiles = async () => {
+    if (!isLoaded || !userId) return router.push("/sign-in")
+    const res = await fetch('/api/files', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: userId })
+    })
+    const data = await res.json()
+    setFiles(data.files)
+    setIsLoading(false)
+
+  }
+  useEffect(() => {
+    fetchFiles()
+  }, [])
   const [currentlyDeletingFile, setCurrentlyDeletingFile] =
     useState(null)
   return (
@@ -39,14 +60,14 @@ const Page = () => {
                 key={file.id}
                 className='col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow transition hover:shadow-lg'>
                 <Link
-                  href={`/dashboard/${file.id}`}
+                  href={`/dashboard/${file._id}`}
                   className='flex flex-col gap-2'>
                   <div className='pt-6 px-6 flex w-full items-center justify-between space-x-6'>
                     <div className='h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500' />
                     <div className='flex-1 truncate'>
                       <div className='flex items-center space-x-3'>
                         <h3 className='truncate text-lg font-medium text-zinc-900'>
-                          {file.name}
+                          {file.fileName}
                         </h3>
                       </div>
                     </div>
