@@ -6,8 +6,6 @@ import Link from 'next/link'
 
 const Navbar = async () => {
     const user = await currentUser()
-
-
     // console.log(user)
     return (
         <div className="w-full absolute bg-white top-0 left-0 h-14 flex items-center justify-center shadow-md">

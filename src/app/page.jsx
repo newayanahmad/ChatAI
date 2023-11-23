@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react'
 import { Button } from '@/components/ui/button';
 import { ArrowRight, LogIn } from "lucide-react";
+import FileUpload from '@/components/FileUpload';
 
 const Page = () => {
   const { userId } = auth();
@@ -33,8 +34,7 @@ const Page = () => {
           </p>
 
           <div className="w-full mt-4">
-            {isAuth ? (
-              <div className="">Upload your file here</div>
+            {isAuth ? (<FileUpload />
             ) : (
               <Link href="/sign-in">
                 <Button>
