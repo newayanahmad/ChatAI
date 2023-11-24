@@ -9,7 +9,7 @@ const Page = () => {
   const { userId } = auth();
   const isAuth = !!userId;
   return (
-    <div className="w-screen min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
+    <div className="w-screen min-h-screen bg-gradient-to-r from-yellow-100 via-red-100 to-blue-100">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="flex flex-col items-center text-center">
           <div className="flex items-center">
@@ -19,9 +19,9 @@ const Page = () => {
           <div className="flex mt-2">
             {isAuth && (
               <>
-                <Link href={`/chat`}>
+                <Link href={`/dashboard`}>
                   <Button>
-                    Go to Chats <ArrowRight className="ml-2" />
+                    Go to Dashboard <ArrowRight className="ml-2" />
                   </Button>
                 </Link>
 
