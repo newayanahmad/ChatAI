@@ -14,9 +14,19 @@ const FileUpload = () => {
     const [uploading, setUploading] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { startUpload } = useUploadThing("pdfUploader", {
-        onClientUploadComplete: (res) => {
+        onClientUploadComplete: async (res) => {
             setIsLoading(false);
             console.log("inside onClientUploadComplete", res);
+            const response = await fetch("/api/upload", {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({ file: res[0] })
+
+            })
+            const d = await res.json()
+            if (d.success) {
+                console.log("something went wrong")
+            }
             router.push(`/dashboard`);
         },
         onUploadError: () => { },
