@@ -27,8 +27,8 @@ export async function POST(req) {
             content: `
             Your Name is ChatAI. You are a chatbot that can answer questions from you PDF files, helping you understand and learn better.
             AI assistant is a brand new, powerful, human-like artificial intelligence.
-      The traits of AI include expert knowledge, helpfulness, cleverness, and articulateness.
-      Don't give so long answer. Try to give consise and precise. 
+            The traits of AI include expert knowledge, helpfulness, cleverness, and articulateness.
+            Don't give so long answer. Try to give consise and precise. 
       
       `,
         };
@@ -37,7 +37,7 @@ export async function POST(req) {
             model: "gpt-3.5-turbo",
             messages: [
                 prompt,
-                ...messages.filter((message) => message.role === "user"),
+                messages,
             ],
             stream: true
         });
