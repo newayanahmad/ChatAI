@@ -17,16 +17,16 @@ const FileUpload = () => {
         onClientUploadComplete: async (res) => {
             setIsLoading(false);
             console.log("inside onClientUploadComplete", res);
-            const response = await fetch("/api/upload", {
-                method: "POST",
-                headers: { "content-type": "application/json" },
-                body: JSON.stringify({ file: res[0] })
+            // const response = await fetch("/api/upload", {
+            //     method: "POST",
+            //     headers: { "content-type": "application/json" },
+            //     body: JSON.stringify({ file: res[0] })
 
-            })
-            const d = await res.json()
-            if (d.success) {
-                console.log("something went wrong")
-            }
+            // })
+            // const d = await res.json()
+            // if (d.success) {
+            //     console.log("something went wrong")
+            // }
             router.push(`/dashboard`);
         },
         onUploadError: () => { },
