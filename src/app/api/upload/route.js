@@ -6,7 +6,7 @@ import { currentUser } from "@clerk/nextjs";
 
 
 export const POST = async (req) => {
-    const { file } = await res.json()
+    const { file } = await req.json()
     try {
         // // console.log("Success", d);
         if (!file) {
