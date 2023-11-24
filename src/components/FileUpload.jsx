@@ -17,7 +17,7 @@ const FileUpload = () => {
         onClientUploadComplete: (res) => {
             setIsLoading(false);
             console.log("inside onClientUploadComplete", res);
-            router.push(`/dashboard/${res.fileId}`);
+            router.push(`/dashboard`);
         },
         onUploadError: () => { },
         onUploadBegin: () => { },
