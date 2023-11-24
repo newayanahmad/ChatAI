@@ -29,7 +29,7 @@ export const ourFileRouter = {
             })
             await f.save()
             // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-            return { file };
+            return { file, fileId: f._id };
         }),
 };
 

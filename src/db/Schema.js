@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 let User, FileModel;
-
 if (mongoose.models.User) {
     User = mongoose.model('User');
 } else {

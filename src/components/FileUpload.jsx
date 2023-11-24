@@ -17,14 +17,10 @@ const FileUpload = () => {
         onClientUploadComplete: (res) => {
             setIsLoading(false);
             console.log("inside onClientUploadComplete", res);
-            router.push(`/dashboard`);
+            router.push(`/dashboard/${res.fileId}`);
         },
-        onUploadError: () => {
-            alert("error occurred while uploading");
-        },
-        onUploadBegin: () => {
-            alert("upload has begun");
-        },
+        onUploadError: () => { },
+        onUploadBegin: () => { },
     },)
     const { getRootProps, getInputProps } = useDropzone(
         {
