@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Message } from "ai/react";
 import { Loader2 } from "lucide-react";
-import React from "react";
+import Markdown from "react-markdown"
 
 
 
@@ -33,7 +33,7 @@ const MessageList = ({ messages, isLoading }) => {
                                 }
                             )}
                         >
-                            <p>{message.content}</p>
+                            <p><Markdown>{message.content}</Markdown></p>
                         </div>
                     </div>
                 );

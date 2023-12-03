@@ -13,6 +13,14 @@ body {
   display: none;
 }
 
+pre {
+  padding: 5px;
+  margin: 5px;
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
